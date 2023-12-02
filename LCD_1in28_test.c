@@ -8,6 +8,7 @@
 #include <stdio.h>		//printf()
 #include <stdlib.h>		//exit()
 #include <signal.h>     //signal()
+#include <wiringPi.h>
 
 
 
@@ -35,7 +36,7 @@ char init(){
 	LCD_1IN28_Clear(BLACK);
 	LCD_SetBacklight(1023);  
 
-    wiringPiISR(TP_INT,INT_EDGE_FALLING,&Touch_INT_callback);
+    wiringPiISR(TP_INT, INT_EDGE_FALLING, &Touch_INT_callback);
 
     return 0;
 }
@@ -94,10 +95,7 @@ char loadBmp(const char *path){
 }
 
 void clearLcd(){
-
-    //LCD_1IN28_Init(HORIZONTAL);
-	LCD_1IN28_Clear(BLACK);
-	//LCD_SetBacklight(1023);        
+	LCD_1IN28_Clear(BLACK);        
 }
 
 

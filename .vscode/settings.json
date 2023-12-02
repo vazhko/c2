@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "dev_config.h": "c",
-        "debug.h": "c"
+        "debug.h": "c",
+        "wiringpi.h": "c"
     }
 }
