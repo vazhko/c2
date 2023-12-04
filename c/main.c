@@ -1,4 +1,4 @@
-#include "test.h"
+#include "../test.h"
 #include <math.h>
 #include <stdlib.h>     //exit()
 #include <stdio.h>
@@ -8,9 +8,9 @@ int main(int argc, char **argv){
 
     char i;
 
-    const char *path1 = "./LCD_1inch28_1.bmp";
-    const char *path2 = "./LCD_1inch28_2.bmp";
-    const char *path3 = "./LCD_1inch28_3.bmp";
+    const char *path1 = "../LCD_1inch28_1.bmp";
+    const char *path2 = "../LCD_1inch28_2.bmp";
+    const char *path3 = "../LCD_1inch28_3.bmp";
     if( argc == 2 ) {
         loadBmp(argv[1]);
     } else {         
