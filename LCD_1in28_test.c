@@ -10,21 +10,21 @@
 #include <signal.h>     //signal()
 #include <wiringPi.h>
 
-
+void Touch_INT_callback(void);
 
 UBYTE flag = 0,flgh = 0;
-//UWORD *BlackImage,x,y,l;
+static UBYTE isInit = 0;
 UWORD BlackImage[LCD_1IN28_HEIGHT*LCD_1IN28_WIDTH*2];
 
 
-static UBYTE isInit = 0;
-
+/************************************************************************/
 void Touch_INT_callback(void) {
     flag = TOUCH_IRQ;
     if (XY.mode == 0)
         XY.Gesture = I2C_Read_Byte(0x01);
 }
 
+/************************************************************************/
 char init(){
     printf("My init.\r\n");
     // Exception handling:ctrl + c
@@ -44,15 +44,6 @@ char init(){
     Paint_Clear(WHITE);
 	Paint_SetRotate(ROTATE_0);   
 
-    /*
-    UDOUBLE Imagesize = LCD_1IN28_HEIGHT*LCD_1IN28_WIDTH*2;
-    printf("Imagesize = %d\r\n", Imagesize);
-    if((BlackImage = (UWORD *)malloc(Imagesize)) == NULL) {
-        printf("Failed to apply for black memory...\r\n");
-       return 2;
-    }
-    */
-
     // TP Init    
     if(Touch_1IN28_init(XY.mode) == true)
         printf("Success:Detected CST816T.\r\n");
@@ -64,6 +55,7 @@ char init(){
     return 0;
 }
 
+/************************************************************************/
 char getTouch(){
     if(isInit == 0){
         //char res = 
@@ -80,41 +72,31 @@ char getTouch(){
     return 0;
 }
 
-
+/************************************************************************/
 char loadBmp(const char *path){
     if(isInit == 0){
         char res = init();
         if(res) return res;
         isInit = 1;
     }
-r
-    //LCD_1IN28_Init(HORIZONTAL);
-	LCD_1IN28_Clear(BLACK);
-	//LCD_SetBacklight(1023);
 
+	LCD_1IN28_Clear(BLACK);
     
     Paint_NewImage(BlackImage, LCD_1IN28_WIDTH, LCD_1IN28_HEIGHT, 0, BLACK, 16);
     Paint_Clear(WHITE);
 	Paint_SetRotate(ROTATE_0); 
 
-    //printf("Show %s\r\n", path);
     Paint_SelectImage(BlackImage);
     //if (0 == GUI_ReadBmp(path)) return 3;
     GUI_ReadBmp(path);
 
     LCD_1IN28_Display((UWORD *)BlackImage);
-    //DEV_Delay_ms(1);
-
-    //free(BlackImage);
-    //BlackImage = NULL;
 
     return 0;
 }
 
+/************************************************************************/
 void clearLcd(){
 	LCD_1IN28_Clear(BLACK);        
 }
-
-
-
 
