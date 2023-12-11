@@ -1,8 +1,18 @@
+//Підготовка
+Операційна система raspberian, робимо юзера, завантажуємось через GUI
+Запускаємо sudo raspi-config, дозволяємо ssh, spi, i2c
+reboot
+Завантажуємось через ssh
+
+cd ~
+git clone http://scm-manager.ifc-system.com:8080/scm/repo/Vladislav.Vazhko/c2
+cd c2
 
 // Збираємо
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/vlad/c2/
- 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/user/c2/
+gcc -lwiringPi -lm -D USE_WIRINGPI_LIB -g -O0 -Wall -c  -fpic *.c 
 gcc -shared -o libtest.so *.o
+
 //Копіюємо бібліотеку у /usr/local/lib
 sudo ldconfig
 
@@ -12,7 +22,7 @@ g++ -lwiringPi -lm -D USE_WIRINGPI_LIB -g -O0 -Wall -c  main.cpp
 g++ -L../ -D USE_WIRINGPI_LIB -g -O0 -Wall -o mycpp main.o -ltest -lwiringPi -lm
 ./mycpp ../LCD_1inch28_3.bmp
 
-//перевіряємо для cpp
+//перевіряємо для c
 cd c
 gcc -lwiringPi -lm -D USE_WIRINGPI_LIB -g -O0 -Wall -c  main.c
 gcc -L../ -D USE_WIRINGPI_LIB -g -O0 -Wall -o myc main.o -ltest -lwiringPi -lm
