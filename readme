@@ -1,8 +1,21 @@
-//Підготовка
-Операційна система raspberian, робимо юзера, завантажуємось через GUI
-Запускаємо sudo raspi-config, дозволяємо ssh, spi, i2c
-reboot
+//Підготовка:
+Операційна система raspberian 2023-10-10-raspios-bookworm-arm64-full.img (На більш нових версіях не працює, бо не встановлює ibrary WiringPi коректно)
+робимо юзера, дозволяємо ssh
 Завантажуємось через ssh
+
+//Конфігуруємо:
+sudo raspi-config
+Choose Interfacing Options -> SPI -> Yes Enable SPI interface
+Choose Interfacing Options -> I2C -> Yes Enable I2C interfacespi
+reboot
+
+//Install Library WiringPi:
+git clone https://github.com/WiringPi/WiringPi
+cd WiringPi
+./build
+gpio -v
+# Run gpio -v and version 2.70 will appear. If it does not appear, it means that there is an error in the installation
+
 
 cd ~
 git clone http://scm-manager.ifc-system.com:8080/scm/repo/Vladislav.Vazhko/c2
