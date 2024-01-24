@@ -40,3 +40,7 @@ cd c
 gcc -lwiringPi -lm -D USE_WIRINGPI_LIB -g -O0 -Wall -c  main.c
 gcc -L../ -D USE_WIRINGPI_LIB -g -O0 -Wall -o myc main.o -ltest -lwiringPi -lm
 ./myc ../LCD_1inch28_1.bmp
+
+//Скрипт для перевірки всього:
+cd c2
+./start.sh
