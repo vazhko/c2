@@ -48,13 +48,23 @@
 #define UWORD   uint16_t
 #define UDOUBLE uint32_t
 
+/*
 #define LCD_CS   8
 #define LCD_RST  27
 #define LCD_DC   25
-#define LCD_BL   18
+#define LCD_BL   22
 
 #define TP_INT   4
 #define TP_RST   17
+*/
+
+#define LCD_CS   10
+#define LCD_RST  2
+#define LCD_DC   6
+#define LCD_BL   3
+
+#define TP_INT   4
+#define TP_RST   0
 
 //LCD
 #define LCD_CS_0		DEV_Digital_Write(LCD_CS,0)
