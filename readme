@@ -44,3 +44,13 @@ gcc -L../ -D USE_WIRINGPI_LIB -g -O0 -Wall -o myc main.o -ltest -lwiringPi -lm
 //Скрипт для перевірки всього:
 cd c2
 ./start.sh
+
+
+
+root@raspberrypi:/opt/c2# gcc -lm -D USE_WIRINGPI_LIB -g -O0 -Wall -c  -fpic *.c
+root@raspberrypi:/opt/c2# gcc -shared -o libtest.so *.o -lwiringPi -lm
+
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/user/c2/^M
+gcc -lwiringPi -lm -D USE_WIRINGPI_LIB -g -O0 -Wall -c  -fpic *.c ^M
+gcc -shared -o libtest.so *.o^M

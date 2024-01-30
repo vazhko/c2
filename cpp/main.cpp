@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 #include "../test.h"
+//#include "../DEV_Config.h"
+
 using namespace std;
 
 int main(int argc, char **argv){
@@ -15,9 +17,10 @@ int main(int argc, char **argv){
     if( argc == 2 ) {
         loadBmp(argv[1]);
     } else {         
-        //loadBmp(path);
+        loadBmp(path1);
     }
     while (1){
+        
         if(getTouch()){
             switch (i){
                 case 0:
@@ -36,6 +39,18 @@ int main(int argc, char **argv){
             i++;
             if(i > 3) i = 0;
         }
+        
+       /*
+       DEV_Delay_ms(200);
+       DEV_Digital_Write(3, 1);
+       DEV_Digital_Write(22, 1);
+       DEV_Digital_Write(0, 1);
+       DEV_Delay_ms(200);
+       DEV_Digital_Write(3, 0);
+       DEV_Digital_Write(0, 0);
+       DEV_Digital_Write(22, 0);
+       */
+
     }
     return 0;
 }

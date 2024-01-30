@@ -88,8 +88,9 @@ void DEV_Delay_ms(UDOUBLE xms)
 #endif
 }
 
-static void DEV_GPIO_Init(void)
-{
+static void DEV_GPIO_Init(void){
+
+    printf("DEV_GPIO_Init  !!! \r\n");
     DEV_GPIO_Mode(LCD_CS, 1);
     DEV_GPIO_Mode(LCD_RST, 1);
     DEV_GPIO_Mode(LCD_DC, 1);
@@ -133,15 +134,15 @@ UBYTE DEV_ModuleInit(void)
 	bcm2835_pwm_set_data(0,512);
 	
 #elif USE_WIRINGPI_LIB  
-    //if(wiringPiSetup() < 0)//use wiringpi Pin number table  
-    if(wiringPiSetupGpio() < 0) { //use BCM2835 Pin number table
+    if(wiringPiSetup() < 0){//use wiringpi Pin number table  
+    //if(wiringPiSetupGpio() < 0) { //use BCM2835 Pin number table
         DEBUG("set wiringPi lib failed	!!! \r\n");
         return 1;
     } else {
         DEBUG("set wiringPi lib success  !!! \r\n");
-    }
+    }    
     DEV_GPIO_Init();
-    wiringPiSPISetup(0,10000000);
+    wiringPiSPISetup(0,40000000);
 	pinMode (LCD_BL, PWM_OUTPUT);
     pwmWrite(LCD_BL,512);
 	
