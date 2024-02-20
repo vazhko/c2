@@ -69,7 +69,7 @@ void DEV_GPIO_Mode(UWORD Pin, UWORD Mode)
         pullUpDnControl(Pin, PUD_UP);
     }else{ 
         pinMode(Pin, OUTPUT);
-        // printf (" %d OUT \r\n",Pin);
+        // DEBUG (" %d OUT \r\n",Pin);
     }
 
 #endif   
@@ -90,7 +90,7 @@ void DEV_Delay_ms(UDOUBLE xms)
 
 static void DEV_GPIO_Init(void){
 
-    printf("DEV_GPIO_Init  !!! \r\n");
+    DEBUG("DEV_GPIO_Init  !!! \r\n");
     DEV_GPIO_Mode(LCD_CS, 1);
     DEV_GPIO_Mode(LCD_RST, 1);
     DEV_GPIO_Mode(LCD_DC, 1);
@@ -113,10 +113,10 @@ UBYTE DEV_ModuleInit(void)
 
  #ifdef USE_BCM2835_LIB
     if(!bcm2835_init()) {
-        printf("bcm2835 init failed  !!! \r\n");
+        DEBUG("bcm2835 init failed  !!! \r\n");
         return 1;
     } else {
-        printf("bcm2835 init success !!! \r\n");
+        DEBUG("bcm2835 init success !!! \r\n");
     }
     DEV_GPIO_Init();
     bcm2835_spi_begin();                                         //Start spi interface, set spi pin for the reuse function
@@ -185,12 +185,12 @@ void DEV_I2C_Init(uint8_t Add)
 {
 
 #ifdef USE_BCM2835_LIB
-    printf("BCM2835 I2C Device\r\n");  
+    DEBUG("BCM2835 I2C Device\r\n");  
     bcm2835_i2c_begin();
     bcm2835_i2c_setSlaveAddress(Add);
     
 #elif USE_WIRINGPI_LIB
-    printf("WIRINGPI I2C Device\r\n");       
+    DEBUG("WIRINGPI I2C Device\r\n");       
     fd = wiringPiI2CSetup(Add);
 
 #endif

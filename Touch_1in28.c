@@ -110,14 +110,14 @@ UBYTE Touch_1IN28_init(UBYTE mode)
     bRet = Touch_1IN28_WhoAmI();
     if (bRet)
     {
-        // printf("Success:Detected CST816T.\r\n");
+        // DEBUG("Success:Detected CST816T.\r\n");
         // Rev = Touch_1IN28_Read_Revision();
-        // printf("CST816T Revision = %d\r\n",Rev);
+        // DEBUG("CST816T Revision = %d\r\n",Rev);
         Touch_1IN28_Stop_Sleep();
     }
     else
     {
-        printf("Error: Not Detected CST816T.\r\n");
+        DEBUG("Error: Not Detected CST816T.\r\n");
         return false;
     }
     XY.mode = mode;

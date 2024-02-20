@@ -9,10 +9,10 @@ clean:
 
 $(TARGET):  
 			rm -rf *.*o
-#			gcc -lm -D USE_WIRINGPI_LIB -g -O0 -Wall -c  -fpic *.c
-#			gcc -shared -o libtest.so *.o -lwiringPi -lm
-			gcc -lwiringPi -lm -D USE_WIRINGPI_LIB -g -O0 -Wall -c  -fpic *.c
-			gcc -shared -o libtest.so *.o
+			gcc -lm -D USE_WIRINGPI_LIB -g -O0 -Wall -c  -fpic *.c
+			gcc -shared -o libtest.so *.o -lwiringPi -lm
+#			gcc -lwiringPi -lm -D USE_WIRINGPI_LIB -g -O0 -Wall -c  -fpic *.c
+#			gcc -shared -o libtest.so *.o
 			sudo yes | sudo cp -rf libtest.so /usr/lib
 			
 install:

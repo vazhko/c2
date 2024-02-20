@@ -26,7 +26,7 @@ void Touch_INT_callback(void) {
 
 /************************************************************************/
 char init(){
-    printf("My init.\r\n");
+    DEBUG("My init.\r\n");
     // Exception handling:ctrl + c
     signal(SIGINT, Handler_1IN28_LCD);    
     
@@ -46,9 +46,9 @@ char init(){
 
     // TP Init    
     if(Touch_1IN28_init(XY.mode) == true)
-        printf("Success:Detected CST816T.\r\n");
+        DEBUG("Success:Detected CST816T.\r\n");
     else
-        printf("Error: Not Detected CST816T.\r\n");
+        DEBUG("Error: Not Detected CST816T.\r\n");
 
     wiringPiISR(TP_INT, INT_EDGE_FALLING, &Touch_INT_callback);
 
@@ -64,7 +64,7 @@ char getTouch(){
         isInit = 1;
     }
     if (flag == TOUCH_IRQ){
-        printf("Touch_INT_callback\r\n");
+        DEBUG("Touch_INT_callback\r\n");
         flag = 0;
         DEV_Delay_ms(1);
         return 1;
@@ -80,7 +80,7 @@ char loadBmp(const char *path){
         isInit = 1;
     }
 
-	LCD_1IN28_Clear(BLACK);
+    //LCD_1IN28_Clear(BLACK);
     
     Paint_NewImage(BlackImage, LCD_1IN28_WIDTH, LCD_1IN28_HEIGHT, 0, BLACK, 16);
     Paint_Clear(WHITE);
@@ -89,8 +89,9 @@ char loadBmp(const char *path){
     Paint_SelectImage(BlackImage);
     //if (0 == GUI_ReadBmp(path)) return 3;
     GUI_ReadBmp(path);
-
+    LCD_BL_0;
     LCD_1IN28_Display((UWORD *)BlackImage);
+    LCD_BL_1;
 
     return 0;
 }

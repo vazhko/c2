@@ -472,7 +472,7 @@ void LCD_1IN28_DisplayPoint(UWORD X, UWORD Y, UWORD Color)
 void  Handler_1IN28_LCD(int signo)
 {
     //System Exit
-    printf("\r\nHandler:Program stop\r\n");     
+    DEBUG("\r\nHandler:Program stop\r\n");     
     DEV_ModuleExit();
 	exit(0);
 }
